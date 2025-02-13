@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       // Themes
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
 
       // Localizations
       translations: Languages(),

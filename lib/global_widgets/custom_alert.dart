@@ -46,7 +46,7 @@ class CustomAlert extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           content: SizedBox(
             height: size.height * .51,
             child: Column(
@@ -70,14 +70,16 @@ class CustomAlert extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: Get.locale!.languageCode == 'bn_BD' ? 40 : 25,
+                    fontSize: 25,
+                    color: AppColors.darkLightBlackWhite,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 Text(
                   description,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.black.withOpacity(.5),
+                    color: AppColors.darkLightBlackWhite.withOpacity(.5),
                     fontSize: 16,
                   ),
                 ),

@@ -67,7 +67,7 @@ class _CustomFieldState extends State<CustomField> {
             ),
             decoration: InputDecoration(
               filled: true,
-              fillColor: Colors.white,
+              fillColor: Theme.of(context).inputDecorationTheme.fillColor,
               prefixIcon: widget.prefixIcon != null
                   ? Padding(
                       padding: const EdgeInsets.all(12),
@@ -77,7 +77,7 @@ class _CustomFieldState extends State<CustomField> {
                         width: 28,
                         color: _focusNode.hasFocus
                             ? AppColors.primary
-                            : Colors.black.withOpacity(.2),
+                            : AppColors.darkLightBlackWhite.withOpacity(.2),
                       ),
                     )
                   : null,
@@ -88,19 +88,18 @@ class _CustomFieldState extends State<CustomField> {
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
-                  color: Colors.black.withOpacity(.1),
+                  color: AppColors.darkLightBlackWhite.withOpacity(.1),
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: const BorderSide(
                   color: AppColors.primary,
-                  width: 1.5,
                 ),
               ),
               hintText: widget.hintText,
               hintStyle: TextStyle(
-                color: Colors.black.withOpacity(.2),
+                color: AppColors.darkLightBlackWhite.withOpacity(.2),
               ),
             ),
           ),

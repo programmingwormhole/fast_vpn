@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:fast_vpn/global_widgets/custom_snackbar.dart';
 import 'package:fast_vpn/routes/route_names.dart';
 import 'package:get/get.dart';
-
 import '../global_widgets/custom_alert.dart';
 import '../utils/assets_manager.dart';
 import '../utils/colors.dart';

@@ -49,7 +49,7 @@ class RegisterController extends GetxController {
         Get.dialog(
           CustomAlert(
             title: 'Success',
-            description: 'Hey ${name.value}, Your registration has been successfully completed!',
+            description: 'Hey ${name.value}, Your account has been successfully created!',
             buttonText: 'Go To Home',
             image: AnimationManager.success,
             isAnimated: true,

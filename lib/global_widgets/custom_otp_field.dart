@@ -25,24 +25,23 @@ class CustomOtpField extends StatelessWidget {
       ],
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Theme.of(context).inputDecorationTheme.fillColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.black.withOpacity(.1),
+            color: AppColors.darkLightBlackWhite.withOpacity(.1),
           ),
         ),
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primary,
-            width: 1.5,
           ),
         ),
         hintText: '-',
         hintStyle: TextStyle(
-          color: Colors.black.withOpacity(.2),
+          color: AppColors.darkLightBlackWhite.withOpacity(.2),
         ),
       ),
     );

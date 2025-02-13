@@ -7,11 +7,20 @@ class AppThemes {
     primaryColor: AppColors.primary,
     fontFamily: 'Urbanist',
     scaffoldBackgroundColor: AppColors.lightModeScaffoldBackground,
+    canvasColor: Colors.black,
+    inputDecorationTheme: InputDecorationTheme(
+      fillColor: Colors.white,
+    )
   );
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: AppColors.primary,
     fontFamily: 'Urbanist',
+    scaffoldBackgroundColor: AppColors.darkModeScaffoldBackground,
+    canvasColor: Colors.white,
+    inputDecorationTheme: InputDecorationTheme(
+      fillColor: Colors.white.withOpacity(.1),
+    )
   );
 }

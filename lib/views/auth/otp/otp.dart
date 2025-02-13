@@ -156,7 +156,7 @@ class OtpVerifyView extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(SvgManager.clock),
+                        SvgPicture.asset(SvgManager.clock, color: AppColors.darkLightBlackWhite,),
                         const Gap(0, 5),
                         Obx(
                           () => Text(
