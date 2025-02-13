@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:fast_vpn/components/custom_gradient.dart';
 import 'package:fast_vpn/global_widgets/custom_sizedbox.dart';
 import 'package:fast_vpn/routes/route_names.dart';
@@ -22,7 +21,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      Get.offAllNamed(RouteNames.login);
+      Get.offAllNamed(RouteNames.onboard);
     });
   }
 

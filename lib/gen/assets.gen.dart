@@ -34,15 +34,29 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
+  /// File path: assets/images/world_map.png
+  AssetGenImage get worldMap =>
+      const AssetGenImage('assets/images/world_map.png');
+
+  /// File path: assets/images/world_map_dark.png
+  AssetGenImage get worldMapDark =>
+      const AssetGenImage('assets/images/world_map_dark.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [favicon, logo];
+  List<AssetGenImage> get values => [favicon, logo, worldMap, worldMapDark];
 }
 
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/arrow_top.svg
+  String get arrowTop => 'assets/svg/arrow_top.svg';
+
   /// File path: assets/svg/clock.svg
   String get clock => 'assets/svg/clock.svg';
+
+  /// File path: assets/svg/crown.svg
+  String get crown => 'assets/svg/crown.svg';
 
   /// File path: assets/svg/email.svg
   String get email => 'assets/svg/email.svg';
@@ -52,6 +66,15 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/eye_open.svg
   String get eyeOpen => 'assets/svg/eye_open.svg';
+
+  /// File path: assets/svg/global.svg
+  String get global => 'assets/svg/global.svg';
+
+  /// File path: assets/svg/internet_waves.svg
+  String get internetWaves => 'assets/svg/internet_waves.svg';
+
+  /// File path: assets/svg/menu_button.svg
+  String get menuButton => 'assets/svg/menu_button.svg';
 
   /// File path: assets/svg/onboard_cup.svg
   String get onboardCup => 'assets/svg/onboard_cup.svg';
@@ -76,10 +99,15 @@ class $AssetsSvgGen {
 
   /// List of all assets
   List<String> get values => [
+        arrowTop,
         clock,
+        crown,
         email,
         eyeClosed,
         eyeOpen,
+        global,
+        internetWaves,
+        menuButton,
         onboardCup,
         onboardSheild,
         onboardSheildNetwork,

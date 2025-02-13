@@ -8,7 +8,8 @@ class AppThemes {
     fontFamily: 'Urbanist',
     scaffoldBackgroundColor: AppColors.lightModeScaffoldBackground,
     canvasColor: Colors.black,
-    inputDecorationTheme: InputDecorationTheme(
+    cardColor: Colors.white,
+    inputDecorationTheme: const InputDecorationTheme(
       fillColor: Colors.white,
     )
   );
@@ -19,6 +20,7 @@ class AppThemes {
     fontFamily: 'Urbanist',
     scaffoldBackgroundColor: AppColors.darkModeScaffoldBackground,
     canvasColor: Colors.white,
+    cardColor: Colors.black,
     inputDecorationTheme: InputDecorationTheme(
       fillColor: Colors.white.withOpacity(.1),
     )

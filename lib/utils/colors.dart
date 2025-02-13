@@ -8,4 +8,5 @@ class AppColors {
   static const Color darkModeScaffoldBackground = Color(0xFF292929);
 
   static Color darkLightBlackWhite = Theme.of(Get.context!).canvasColor;
+  static Color sameThemeColor = Theme.of(Get.context!).cardColor;
 }

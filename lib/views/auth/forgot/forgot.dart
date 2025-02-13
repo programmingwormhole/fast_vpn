@@ -68,7 +68,7 @@ class ForgotPasswordView extends StatelessWidget {
                     Obx(
                       () => CustomButton(
                         isLoading: controller.isLoading.value,
-                        title: 'Sign In',
+                        title: 'Send OTP',
                         onTap:
                             controller.email.isEmpty ? null : controller.forgotRequest,
                         buttonType: controller.email.isEmpty

@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       // Themes
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
 
       // Localizations
       translations: Languages(),
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 
       // Routes
       getPages: RouteDestinations.pages,
-      initialRoute: RouteNames.splash,
+      initialRoute: RouteNames.home,
     );
   }
 }
