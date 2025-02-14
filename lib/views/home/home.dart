@@ -6,6 +6,7 @@ import 'package:fast_vpn/global_widgets/custom_download_upload_card.dart';
 import 'package:fast_vpn/global_widgets/custom_sizedbox.dart';
 import 'package:fast_vpn/utils/assets_manager.dart';
 import 'package:fast_vpn/utils/colors.dart';
+import 'package:fast_vpn/views/home/widgets/change_location_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeController());
+
     return Scaffold(
       body: Stack(
         children: [
@@ -78,27 +81,63 @@ class HomeView extends StatelessWidget {
                           ),
                         ),
                         const Gap(20),
-                        Container(
-                          width: MediaQuery.sizeOf(context).width * .6,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(600),
-                              border: Border.all(
-                                color: AppColors.primary,
-                              )),
-                          padding: const EdgeInsets.all(8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                'Change Location',
-                                style: TextStyle(
-                                    foreground: customTextGradient(),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              ),
-                              SvgPicture.asset(SvgManager.arrowTop)
-                            ],
+                        InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (_) {
+                                return const ChangeLocationSheet();
+                              },
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent
+                            );
+                          },
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width * .6,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(600),
+                                border: Border.all(
+                                  color: AppColors.primary,
+                                )),
+                            padding: const EdgeInsets.all(8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  'Change Location',
+                                  style: TextStyle(
+                                      foreground: customTextGradient(),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                SvgPicture.asset(SvgManager.arrowTop)
+                              ],
+                            ),
                           ),
+                        ),
+                        const Gap(20),
+                        Obx(
+                          () => controller.isConnected.value
+                              ? Column(
+                                  children: [
+                                    Text(
+                                      controller.formattedTime,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 60,
+                                          foreground: customTextGradient()),
+                                    ),
+                                    const Text(
+                                      'Your IP: 127.0.0.1',
+                                      style: TextStyle(
+                                        color: AppColors.primary,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    )
+                                  ],
+                                )
+                              : const Gap(),
                         )
                       ],
                     ),
@@ -141,25 +180,24 @@ class HomeBottom extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-
-                Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white.withOpacity(.2),
-                  ),
-                  padding: const EdgeInsets.all(15),
+                InkWell(
+                  onTap: () => controller.isConnected.value
+                      ? controller.disconnectServer()
+                      : controller.connectServer(),
                   child: Container(
-                    padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.white.withOpacity(.4),
+                      color: controller.isConnected.value
+                          ? AppColors.primary.withOpacity(.2)
+                          : Colors.white.withOpacity(.2),
                     ),
-                    child: InkWell(
-                      onTap: () {
-                        if (controller.isConnected.value) {
-                          print('sdsd');
-                        }
-                      },
+                    padding: const EdgeInsets.all(15),
+                    child: Container(
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white.withOpacity(.4),
+                      ),
                       child: Container(
                         height: 140,
                         width: 140,
@@ -186,16 +224,21 @@ class HomeBottom extends StatelessWidget {
                 ),
                 if (controller.isConnecting.value ||
                     controller.isConnected.value)
-                  SizedBox(
-                    width: 160,
-                    height: 160,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 12,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                        AppColors.primary,
+                  InkWell(
+                    onTap: controller.isConnected.value
+                        ? controller.disconnectServer
+                        : null,
+                    child: SizedBox(
+                      width: 160,
+                      height: 160,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 12,
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                          AppColors.primary,
+                        ),
+                        strokeCap: StrokeCap.round,
+                        value: controller.isConnected.value ? 100 : null,
                       ),
-                      strokeCap: StrokeCap.round,
-                      value: controller.isConnected.value ? 100 : null,
                     ),
                   ),
               ],
@@ -214,14 +257,14 @@ class HomeBottom extends StatelessWidget {
                           Expanded(
                             child: CustomDownloadUploadCard(
                               icon: SvgManager.download,
-                              speed: '62.5 MB/s',
+                              speed: controller.downloadSpeed.value,
                             ),
                           ),
                           const Gap(0, 15),
                           Expanded(
                             child: CustomDownloadUploadCard(
                               icon: SvgManager.upload,
-                              speed: '41.2 MB/s',
+                              speed: controller.uploadSpeed.value,
                             ),
                           ),
                         ],

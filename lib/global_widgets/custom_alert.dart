@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:fast_vpn/global_widgets/custom_sizedbox.dart';
 import 'package:fast_vpn/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ class CustomAlert extends StatelessWidget {
   final bool? isAnimated;
   final String? buttonIcon;
   final Color? lottieColor;
+  final bool showIcon;
 
   const CustomAlert({
     super.key,
@@ -29,12 +31,13 @@ class CustomAlert extends StatelessWidget {
     this.isAnimated,
     this.secondButtonText,
     this.onSecondButtonTap,
-    this.buttonIcon, this.lottieColor,
+    this.buttonIcon,
+    this.lottieColor,
+    this.showIcon = true,
   });
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: BackdropFilter(
@@ -42,62 +45,79 @@ class CustomAlert extends StatelessWidget {
           sigmaX: 4,
           sigmaY: 4,
         ),
-        child: AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          content: SizedBox(
-            height: size.height * .51,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  height: 150,
-                  width: 150,
-                  child: isAnimated == true
-                      ? Lottie.asset(image,
-                          delegates: LottieDelegates(
-                            values: [
-                              ValueDelegate.color(
-                                const ['**'], // Apply to all layers
-                                value: lottieColor, // Change to your desired color
-                              ),
-                            ],
-                          ))
-                      : Image.asset(image),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(10)
                 ),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: AppColors.darkLightBlackWhite,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    if (showIcon)...[
+                      SizedBox(
+                        height: 150,
+                        width: 150,
+                        child: isAnimated == true
+                            ? Lottie.asset(image,
+                            delegates: LottieDelegates(
+                              values: [
+                                ValueDelegate.color(
+                                  const ['**'], // Apply to all layers
+                                  value:
+                                  lottieColor, // Change to your desired color
+                                ),
+                              ],
+                            ))
+                            : Image.asset(image),
+                      ),
+                    ],
+                    Column(
+                      children: [
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: AppColors.darkLightBlackWhite,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          description,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: AppColors.darkLightBlackWhite.withOpacity(.5),
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Gap(20),
+                    Column(
+                      children: [
+                        CustomButton(
+                          title: buttonText,
+                          onTap: onButtonTap ?? () => Get.back(),
+                        ),
+                        if (secondButtonText != null) ...[
+                          const Gap(10),
+                          CustomButton(
+                            title: secondButtonText!,
+                            onTap: onSecondButtonTap ?? () => Get.back(),
+                            buttonType: ButtonType.soft,
+                          ),
+                        ]
+                      ],
+                    )
+                  ],
                 ),
-                Text(
-                  description,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.darkLightBlackWhite.withOpacity(.5),
-                    fontSize: 16,
-                  ),
-                ),
-                CustomButton(
-                  title: buttonText,
-                  onTap: onButtonTap ?? () => Get.back(),
-                ),
-                if (secondButtonText != null) ...[
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  CustomButton(
-                    title: secondButtonText!,
-                    onTap: onSecondButtonTap ?? () => Get.back(),
-                  ),
-                ]
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),
