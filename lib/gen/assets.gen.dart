@@ -58,6 +58,12 @@ class $AssetsSvgGen {
   /// File path: assets/svg/crown.svg
   String get crown => 'assets/svg/crown.svg';
 
+  /// File path: assets/svg/disconnect.svg
+  String get disconnect => 'assets/svg/disconnect.svg';
+
+  /// File path: assets/svg/download.svg
+  String get download => 'assets/svg/download.svg';
+
   /// File path: assets/svg/email.svg
   String get email => 'assets/svg/email.svg';
 
@@ -94,14 +100,22 @@ class $AssetsSvgGen {
   /// File path: assets/svg/person.svg
   String get person => 'assets/svg/person.svg';
 
+  /// File path: assets/svg/power.svg
+  String get power => 'assets/svg/power.svg';
+
   /// File path: assets/svg/shield.svg
   String get shield => 'assets/svg/shield.svg';
+
+  /// File path: assets/svg/upload.svg
+  String get upload => 'assets/svg/upload.svg';
 
   /// List of all assets
   List<String> get values => [
         arrowTop,
         clock,
         crown,
+        disconnect,
+        download,
         email,
         eyeClosed,
         eyeOpen,
@@ -114,7 +128,9 @@ class $AssetsSvgGen {
         onboardSupport,
         password,
         person,
-        shield
+        power,
+        shield,
+        upload
       ];
 }
 

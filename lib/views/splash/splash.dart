@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'package:fast_vpn/components/custom_gradient.dart';
 import 'package:fast_vpn/global_widgets/custom_sizedbox.dart';
-import 'package:fast_vpn/routes/route_names.dart';
 import 'package:fast_vpn/utils/assets_manager.dart';
 import 'package:fast_vpn/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -21,7 +19,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      Get.offAllNamed(RouteNames.onboard);
+      // Get.offAllNamed(RouteNames.onboard);
     });
   }
 

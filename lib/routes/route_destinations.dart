@@ -4,7 +4,6 @@ import 'package:fast_vpn/views/auth/otp/otp.dart';
 import 'package:fast_vpn/views/auth/register/register.dart';
 import 'package:fast_vpn/views/auth/reset/reset.dart';
 import 'package:fast_vpn/views/home/home.dart';
-import 'package:fast_vpn/views/onboard/onboard.dart';
 import 'package:fast_vpn/views/splash/splash.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:fast_vpn/routes/route_names.dart';
@@ -15,10 +14,10 @@ class RouteDestinations {
       name: RouteNames.splash,
       page: () => const SplashView(),
     ),
-    GetPage(
-      name: RouteNames.onboard,
-      page: () => const OnboardView(),
-    ),
+    // GetPage(
+    //   name: RouteNames.onboard,
+    //   page: () => const OnboardView(),
+    // ),
     GetPage(
       name: RouteNames.login,
       page: () => const LoginView(),
