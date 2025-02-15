@@ -5,6 +5,8 @@ import 'package:fast_vpn/utils/assets_manager.dart';
 import 'package:fast_vpn/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import '../../routes/route_names.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -19,7 +21,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      // Get.offAllNamed(RouteNames.onboard);
+      Get.offAllNamed(RouteNames.onboard);
     });
   }
 

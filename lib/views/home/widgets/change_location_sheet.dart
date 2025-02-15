@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:fast_vpn/global_widgets/custom_sizedbox.dart';
 import 'package:fast_vpn/utils/colors.dart';
 import 'package:fast_vpn/views/home/widgets/free_server_list.dart';
+import 'package:fast_vpn/views/home/widgets/premium_server_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -58,9 +59,10 @@ class ChangeLocationSheet extends StatelessWidget {
                       color: AppColors.darkLightBlackWhite.withOpacity(.01),
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: TabBar(
-                      unselectedLabelColor: AppColors.darkLightBlackWhite.withOpacity(.5),
+                      unselectedLabelColor:
+                          AppColors.darkLightBlackWhite.withOpacity(.5),
                       labelColor: AppColors.primary,
                       dividerHeight: 0,
                       indicator: BoxDecoration(
@@ -69,20 +71,22 @@ class ChangeLocationSheet extends StatelessWidget {
                           color: AppColors.primary,
                           width: 1.5,
                         ),
-                        color:  Get.isDarkMode ? Colors.black.withOpacity(.2) : Colors.white,
+                        color: Get.isDarkMode
+                            ? Colors.black.withOpacity(.2)
+                            : Colors.white,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(.1),
                             blurRadius: 10,
-                            offset: Offset(0, 4),
+                            offset: const Offset(0, 4),
                           )
-                        ]
+                        ],
                       ),
                       indicatorSize: TabBarIndicatorSize.tab,
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                         fontWeight: FontWeight.w600,
                       ),
-                      tabs: [
+                      tabs: const [
                         Tab(
                           text: 'Free',
                         ),
@@ -93,11 +97,13 @@ class ChangeLocationSheet extends StatelessWidget {
                     ),
                   ),
                   const Gap(15),
-                  Expanded(
-                    child: const TabBarView(children: [
-                      FreeServerList(),
-                      FreeServerList(),
-                    ]),
+                  const Expanded(
+                    child: TabBarView(
+                      children: [
+                        FreeServerList(),
+                        PremiumServerList(),
+                      ],
+                    ),
                   )
                 ],
               ),

@@ -8,16 +8,18 @@ import 'package:fast_vpn/views/splash/splash.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:fast_vpn/routes/route_names.dart';
 
+import '../views/onboard/onboard.dart';
+
 class RouteDestinations {
   static List<GetPage> pages = [
     GetPage(
       name: RouteNames.splash,
       page: () => const SplashView(),
     ),
-    // GetPage(
-    //   name: RouteNames.onboard,
-    //   page: () => const OnboardView(),
-    // ),
+    GetPage(
+      name: RouteNames.onboard,
+      page: () => const OnboardView(),
+    ),
     GetPage(
       name: RouteNames.login,
       page: () => const LoginView(),

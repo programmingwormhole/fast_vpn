@@ -1,6 +1,8 @@
 import 'package:fast_vpn/components/custom_gradient.dart';
+import 'package:fast_vpn/global_widgets/custom_sizedbox.dart';
 import 'package:fast_vpn/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 enum ButtonType { normal, soft }
 
@@ -15,6 +17,7 @@ class CustomButton extends StatelessWidget {
   final double buttonHeight;
   final Function()? onTap;
   final bool isLoading;
+  final String? svgIcon;
 
   const CustomButton({
     super.key,
@@ -26,6 +29,7 @@ class CustomButton extends StatelessWidget {
     this.buttonHeight = 50,
     this.onTap,
     this.isLoading = false,
+    this.svgIcon,
   });
 
   @override
@@ -55,18 +59,29 @@ class CustomButton extends StatelessWidget {
                         : Colors.white,
                   ),
                 )
-              : Text(
-                  title,
-                  style: TextStyle(
-                    color: buttonType == ButtonType.soft
-                        ? AppColors.primary.withOpacity(.5)
-                        : titleColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+              : svgIcon != null
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(svgIcon!),
+                        const Gap(0, 10),
+                        text(title, buttonType, titleColor)
+                      ],
+                    )
+                  : text(title, buttonType, titleColor),
         ),
       ),
     );
   }
 }
+
+Widget text(String title, buttonType, titleColor) => Text(
+      title,
+      style: TextStyle(
+        color: buttonType == ButtonType.soft
+            ? AppColors.primary.withOpacity(.5)
+            : titleColor,
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+      ),
+    );
