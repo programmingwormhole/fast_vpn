@@ -3,6 +3,7 @@ import 'package:fast_vpn/components/text_gradient_paint.dart';
 import 'package:fast_vpn/controllers/home_controller.dart';
 import 'package:fast_vpn/global_widgets/custom_app_bar.dart';
 import 'package:fast_vpn/global_widgets/custom_download_upload_card.dart';
+import 'package:fast_vpn/global_widgets/custom_location_tile.dart';
 import 'package:fast_vpn/global_widgets/custom_sizedbox.dart';
 import 'package:fast_vpn/utils/assets_manager.dart';
 import 'package:fast_vpn/utils/colors.dart';
@@ -50,47 +51,52 @@ class HomeView extends StatelessWidget {
                     child: Column(
                       children: [
                         const Gap(15),
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.white
-                                .withOpacity(Get.isDarkMode ? .1 : .7),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: ListTile(
-                            leading: Container(
-                              height: 45,
-                              width: 45,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFD9D9D9),
-                                borderRadius: BorderRadius.circular(5),
+                        Obx(() {
+                          if (controller.isConnected.value) {
+                            return CustomLocationTile(server: controller.selectedServer.value!);
+                          }
+
+                          return Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.white
+                                  .withOpacity(Get.isDarkMode ? .1 : .7),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: ListTile(
+                              leading: Container(
+                                height: 45,
+                                width: 45,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFD9D9D9),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                padding: const EdgeInsets.all(8),
+                                child: SvgPicture.asset(SvgManager.global),
                               ),
-                              padding: const EdgeInsets.all(8),
-                              child: SvgPicture.asset(SvgManager.global),
+                              title: Text(
+                                'Best Location',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                    foreground: customTextGradient()),
+                              ),
+                              subtitle: const Text('Fastest Server'),
+                              trailing:
+                              SvgPicture.asset(SvgManager.internetWaves),
                             ),
-                            title: Text(
-                              'Best Location',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17,
-                                  foreground: customTextGradient()),
-                            ),
-                            subtitle: const Text('Fastest Server'),
-                            trailing:
-                                SvgPicture.asset(SvgManager.internetWaves),
-                          ),
-                        ),
+                          );
+                        }),
                         const Gap(20),
                         InkWell(
                           onTap: () {
                             showModalBottomSheet(
-                              context: context,
-                              builder: (_) {
-                                return const ChangeLocationSheet();
-                              },
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent
-                            );
+                                context: context,
+                                builder: (_) {
+                                  return const ChangeLocationSheet();
+                                },
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent);
                           },
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * .6,
@@ -127,9 +133,9 @@ class HomeView extends StatelessWidget {
                                           fontSize: 60,
                                           foreground: customTextGradient()),
                                     ),
-                                    const Text(
-                                      'Your IP: 127.0.0.1',
-                                      style: TextStyle(
+                                    Text(
+                                      'Your IP: ${controller.selectedServer.value!.ip}',
+                                      style: const TextStyle(
                                         color: AppColors.primary,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
@@ -183,7 +189,7 @@ class HomeBottom extends StatelessWidget {
                 InkWell(
                   onTap: () => controller.isConnected.value
                       ? controller.disconnectServer()
-                      : controller.connectServer(),
+                      : controller.connectServer(controller.servers.first),
                   child: Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,

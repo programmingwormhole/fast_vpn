@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:fast_vpn/global_widgets/custom_sizedbox.dart';
 import 'package:fast_vpn/utils/colors.dart';
+import 'package:fast_vpn/views/home/widgets/free_server_list.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ChangeLocationSheet extends StatelessWidget {
   const ChangeLocationSheet({super.key});
@@ -53,7 +55,7 @@ class ChangeLocationSheet extends StatelessWidget {
                   const Gap(10),
                   Container(
                     decoration: BoxDecoration(
-                      color: AppColors.darkLightBlackWhite.withOpacity(.03),
+                      color: AppColors.darkLightBlackWhite.withOpacity(.01),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     padding: EdgeInsets.all(10),
@@ -67,7 +69,7 @@ class ChangeLocationSheet extends StatelessWidget {
                           color: AppColors.primary,
                           width: 1.5,
                         ),
-                        color: AppColors.sameThemeColor,
+                        color:  Get.isDarkMode ? Colors.black.withOpacity(.2) : Colors.white,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(.1),
@@ -89,6 +91,13 @@ class ChangeLocationSheet extends StatelessWidget {
                         ),
                       ],
                     ),
+                  ),
+                  const Gap(15),
+                  Expanded(
+                    child: const TabBarView(children: [
+                      FreeServerList(),
+                      FreeServerList(),
+                    ]),
                   )
                 ],
               ),

@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:fast_vpn/global_widgets/custom_snackbar.dart';
 import 'package:get/get.dart';
 import '../global_widgets/custom_alert.dart';
+import '../models/server_model.dart';
 import '../utils/assets_manager.dart';
 
 class HomeController extends GetxController {
-
   RxBool isConnecting = RxBool(false);
   RxBool isConnected = RxBool(false);
   var downloadSpeed = '0 MB/s'.obs;
@@ -16,8 +16,15 @@ class HomeController extends GetxController {
   var elapsedSeconds = 0.obs;
   Timer? _timer;
 
-  void connectServer () {
+  void connectServer(ServerModel server) {
+    if (isConnected.value) {
+      isConnected.value = false;
+      _timer!.cancel();
+      elapsedSeconds.value = 0;
+    }
+
     isConnecting.value = true;
+    selectedServer.value = server;
 
     Future.delayed(const Duration(seconds: 3), () {
       isConnecting.value = false;
@@ -45,12 +52,14 @@ class HomeController extends GetxController {
 
   void startUpdatingSpeed() {
     Timer.periodic(const Duration(milliseconds: 1000), (timer) {
-      downloadSpeed.value = '${(Random().nextDouble() * 100).toStringAsFixed(1)} MB/s';
-      uploadSpeed.value = '${(Random().nextDouble() * 50).toStringAsFixed(1)} MB/s';
+      downloadSpeed.value =
+          '${(Random().nextDouble() * 100).toStringAsFixed(1)} MB/s';
+      uploadSpeed.value =
+          '${(Random().nextDouble() * 50).toStringAsFixed(1)} MB/s';
     });
   }
 
-  void disconnectServer () {
+  void disconnectServer() {
     Get.dialog(
       CustomAlert(
         title: 'Disconnect',
@@ -74,10 +83,78 @@ class HomeController extends GetxController {
     );
   }
 
+  List<ServerModel> servers = [
+    ServerModel(
+      flag:
+          'https://cdn.pixabay.com/photo/2013/07/13/12/03/flag-159070_1280.png',
+      country: 'United Kingdom',
+      server: 'London',
+      networkWave: 3,
+      ip: '18.16.125.20',
+    ),
+    ServerModel(
+      flag:
+          'https://flagsireland.com/cdn/shop/products/CanadaFlag.png?v=1678435840',
+      country: 'Canada',
+      server: 'Victoria',
+      networkWave: 3,
+      ip: '288.161.125.20',
+    ),
+    ServerModel(
+      flag:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png',
+      country: 'Germany',
+      server: 'Berlin',
+      networkWave: 2,
+      ip: '198.144.20.3',
+    ),
+    ServerModel(
+      flag:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_Thailand.svg/640px-Flag_of_Thailand.svg.png',
+      country: 'Thailand',
+      server: 'Bangkok',
+      networkWave: 1,
+      ip: '158.27.0.58',
+    ),
+    ServerModel(
+      flag:
+      'https://cdn.pixabay.com/photo/2013/07/13/12/03/flag-159070_1280.png',
+      country: 'United Kingdom',
+      server: 'London',
+      networkWave: 3,
+      ip: '18.16.125.20',
+    ),
+    ServerModel(
+      flag:
+      'https://flagsireland.com/cdn/shop/products/CanadaFlag.png?v=1678435840',
+      country: 'Canada',
+      server: 'Victoria',
+      networkWave: 3,
+      ip: '288.161.125.20',
+    ),
+    ServerModel(
+      flag:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png',
+      country: 'Germany',
+      server: 'Berlin',
+      networkWave: 2,
+      ip: '198.144.20.3',
+    ),
+    ServerModel(
+      flag:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_Thailand.svg/640px-Flag_of_Thailand.svg.png',
+      country: 'Thailand',
+      server: 'Bangkok',
+      networkWave: 1,
+      ip: '158.27.0.58',
+    ),
+  ];
+
+  Rxn<ServerModel> selectedServer = Rxn<ServerModel>();
+
   @override
   void onClose() {
     super.onClose();
     _timer!.cancel();
   }
-
 }

@@ -76,6 +76,15 @@ class $AssetsSvgGen {
   /// File path: assets/svg/global.svg
   String get global => 'assets/svg/global.svg';
 
+  /// File path: assets/svg/internet_full.svg
+  String get internetFull => 'assets/svg/internet_full.svg';
+
+  /// File path: assets/svg/internet_one.svg
+  String get internetOne => 'assets/svg/internet_one.svg';
+
+  /// File path: assets/svg/internet_two.svg
+  String get internetTwo => 'assets/svg/internet_two.svg';
+
   /// File path: assets/svg/internet_waves.svg
   String get internetWaves => 'assets/svg/internet_waves.svg';
 
@@ -120,6 +129,9 @@ class $AssetsSvgGen {
         eyeClosed,
         eyeOpen,
         global,
+        internetFull,
+        internetOne,
+        internetTwo,
         internetWaves,
         menuButton,
         onboardCup,
