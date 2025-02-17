@@ -5,12 +5,15 @@ import 'package:fast_vpn/global_widgets/custom_app_bar.dart';
 import 'package:fast_vpn/global_widgets/custom_download_upload_card.dart';
 import 'package:fast_vpn/global_widgets/custom_location_tile.dart';
 import 'package:fast_vpn/global_widgets/custom_sizedbox.dart';
+import 'package:fast_vpn/routes/route_names.dart';
 import 'package:fast_vpn/utils/assets_manager.dart';
 import 'package:fast_vpn/utils/colors.dart';
 import 'package:fast_vpn/views/home/widgets/change_location_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+import '../../global_widgets/custom_circle_button.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -45,7 +48,17 @@ class HomeView extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  const CustomAppBar(),
+                  CustomAppBar(
+                    backgroundColor: Colors.transparent,
+                    leading: CircleButton(icon: SvgManager.menuButton),
+                    actions: [
+                      CircleButton(
+                        icon: SvgManager.crown,
+                        gradientType: true,
+                        onTap: () => Get.toNamed(RouteNames.premium),
+                      )
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
@@ -53,7 +66,8 @@ class HomeView extends StatelessWidget {
                         const Gap(15),
                         Obx(() {
                           if (controller.isConnected.value) {
-                            return CustomLocationTile(server: controller.selectedServer.value!);
+                            return CustomLocationTile(
+                                server: controller.selectedServer.value!);
                           }
 
                           return Container(
@@ -83,7 +97,7 @@ class HomeView extends StatelessWidget {
                               ),
                               subtitle: const Text('Fastest Server'),
                               trailing:
-                              SvgPicture.asset(SvgManager.internetWaves),
+                                  SvgPicture.asset(SvgManager.internetWaves),
                             ),
                           );
                         }),

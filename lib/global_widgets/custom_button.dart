@@ -42,7 +42,7 @@ class CustomButton extends StatelessWidget {
           horizontal: 15,
         ),
         decoration: BoxDecoration(
-          gradient: customGradient(),
+          gradient: buttonType == ButtonType.normal ? null : customGradient(),
           color: buttonType == ButtonType.soft
               ? backgroundColor.withOpacity(.1)
               : backgroundColor,

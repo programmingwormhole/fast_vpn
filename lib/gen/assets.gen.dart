@@ -52,14 +52,23 @@ class $AssetsSvgGen {
   /// File path: assets/svg/arrow_top.svg
   String get arrowTop => 'assets/svg/arrow_top.svg';
 
+  /// File path: assets/svg/back_arrow.svg
+  String get backArrow => 'assets/svg/back_arrow.svg';
+
   /// File path: assets/svg/clock.svg
   String get clock => 'assets/svg/clock.svg';
 
   /// File path: assets/svg/crown.svg
   String get crown => 'assets/svg/crown.svg';
 
+  /// File path: assets/svg/crown_filled.svg
+  String get crownFilled => 'assets/svg/crown_filled.svg';
+
   /// File path: assets/svg/disconnect.svg
   String get disconnect => 'assets/svg/disconnect.svg';
+
+  /// File path: assets/svg/done.svg
+  String get done => 'assets/svg/done.svg';
 
   /// File path: assets/svg/download.svg
   String get download => 'assets/svg/download.svg';
@@ -121,9 +130,12 @@ class $AssetsSvgGen {
   /// List of all assets
   List<String> get values => [
         arrowTop,
+        backArrow,
         clock,
         crown,
+        crownFilled,
         disconnect,
+        done,
         download,
         email,
         eyeClosed,
